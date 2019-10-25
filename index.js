@@ -95,10 +95,12 @@ bot.on("message", async message => {
             return evalCmd(message, code);
         }
 
+        /*
         else { // if the command doesn't match anything you can say something or just ignore it
             message.channel.send(`I don't know what command that is.`);
             return;
         }
+        */
         
     } else if (message.content.indexOf("<@"+bot.user.id) === 0 || message.content.indexOf("<@!"+bot.user.id) === 0) { // Catch @Mentions
 
