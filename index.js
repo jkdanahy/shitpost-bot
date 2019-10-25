@@ -3,13 +3,13 @@ var http = require('http');
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 8080;
-var _dirname = '/home/jamie/Dev/Memes/shitpost-bot'
+var port = process.env.PORT || 80;
 var bodyParser = require('body-parser');
 // Discord Js Stuff
 const config = require('./config.json');
 const Discord = require('discord.js');
 const util = require('util');
+const _dirname = config.dir;
 
 const bot = new Discord.Client({
     disableEveryone: true,
