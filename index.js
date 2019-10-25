@@ -5,6 +5,7 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 80;
 var bodyParser = require('body-parser');
+var channelList = [];
 // Discord Js Stuff
 const config = require('./config.json');
 const Discord = require('discord.js');
@@ -27,7 +28,7 @@ app.get('/', function(req, res) {
 
 app.post('/honk', function(req, res) {
     var honk = req.body.message;
-    bot.channels.forEach((channel) => {
+    channelList.forEach((channel) => {
         if(channel.type == 'text') {
             bot.channels.get(channel.id).send(honk);
         }
@@ -76,6 +77,16 @@ bot.on("message", async message => {
 
         else if (cmd === 'ping') { // ping > pong just in case..
             return message.channel.send('pong');
+        }
+
+        else if (cmd === '!honkbeacon') { 
+            if (channelList.includes(message.channel)) {
+                channelList.splice(channelList.indexOf(message.channel),1);
+                return message.channel.send('Honk Beacon Deactivated!');
+            } else {
+                channelList.push(message.channel);
+                return message.channel.send('Honk Beacon Activated!');
+            }
         }
 
         // Make sure this command always checks for you. YOU NEVER WANT ANYONE ELSE TO USE THIS COMMAND
